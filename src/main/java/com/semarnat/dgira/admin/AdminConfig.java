@@ -43,8 +43,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"com.semarnat.dgira.admin.dao"}, transactionManagerRef = "transactionManager", entityManagerFactoryRef = "entityManagerFactory")
-@ComponentScan({"com.semarnat.dgira.admin.dao"}) 
+@EnableJpaRepositories(basePackages = {"com.semarnat.dgira.admin.repos"}, transactionManagerRef = "transactionManager", entityManagerFactoryRef = "entityManagerFactory")
+@ComponentScan({"com.semarnat.dgira.admin.repos"}) 
 public class AdminConfig implements WebMvcConfigurer {
 
     @Autowired
