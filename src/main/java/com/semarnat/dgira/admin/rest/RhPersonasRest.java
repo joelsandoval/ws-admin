@@ -26,11 +26,11 @@ public class RhPersonasRest {
     @Autowired
     private RhPersonasRepository repoP;
     
-    @GetMapping (value = "/id")
+    @GetMapping (value = "/lista")
     @ResponseBody
-    public List<Integer> damePersona() {
+    public List<String> dameTpersona() {
         LOGGER.info("Estro a buscar Personas");
-        return repoP.damePersona();
+        return repoP.dameTpersona();
     }
     
 }
