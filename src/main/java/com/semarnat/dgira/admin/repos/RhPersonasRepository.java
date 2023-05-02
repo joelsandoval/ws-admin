@@ -8,6 +8,7 @@ import com.semarnat.dgira.admin.model.RhPersonas;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Repository;
 public interface RhPersonasRepository extends CrudRepository<RhPersonas, Integer> {
 
     //Consultas Nativas
+
     @Query(value = "select rp.id, concat(rp.nombre,' ',rp.apellido_pat,' ',rp.apellido_mat) as nombre_completo,\n"
             + " rpt.nombre_puesto, rn.nombre, ra2.dir_corto,ra.activo\n"
             + "from administracion.rh_personas rp\n"
@@ -26,4 +28,12 @@ public interface RhPersonasRepository extends CrudRepository<RhPersonas, Integer
             + "inner join administracion.rh_nombramiento rn on rn.id = rpt.tipo_nombramiento\n"
             + "inner join administracion.rh_areas ra2 on ra2.id = rpt.tipo_area", nativeQuery = true)
     List<String> dameTpersona();
+
+    @Query(value = "select distinct rp.id from administracion.rh_personas rp", nativeQuery = true)
+    List<Integer> damePersona();
+
+    @Query(value = "select * from administracion.rh_personas p \n"
+            + "where extract(month from p.fecha_nacimiento) = :mes order by fecha_nacimiento", nativeQuery = true)
+    List<RhPersonas> dameCumpleaniosMes(@Param("mes") Integer mes);
+
 }
