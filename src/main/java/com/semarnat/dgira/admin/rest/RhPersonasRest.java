@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 @RequestMapping(value = "personas")
 @CrossOrigin
-
 public class RhPersonasRest {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(RhPersonasRest.class);
@@ -26,7 +25,7 @@ public class RhPersonasRest {
     @Autowired
     private RhPersonasRepository repoP;
     
-    @GetMapping (value = "/id")
+    @GetMapping(value = "/id")
     @ResponseBody
     public List<Integer> damePersona() {
         LOGGER.info("Estro a buscar Personas");
