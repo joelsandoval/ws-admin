@@ -5,6 +5,7 @@
 package com.semarnat.dgira.admin.repos;
 
 import com.semarnat.dgira.admin.model.RhPersonas;
+import com.semarnat.dgira.admin.model.generic.IEmpleados;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -20,17 +21,17 @@ public interface RhPersonasRepository extends CrudRepository<RhPersonas, Integer
 
     //Consultas Nativas
 
-   /* @Query(value = "select distinct rp.id from administracion.rh_personas rp", nativeQuery = true)
+    /* @Query(value = "select distinct rp.id from administracion.rh_personas rp", nativeQuery = true)
     List<Integer> damePersona();
-    */
-    
+     */
     @Query(value = "select * from administracion.rh_personas p \n"
             + "where extract(month from p.fecha_nacimiento) = :mes order by fecha_nacimiento", nativeQuery = true)
     List<RhPersonas> dameCumpleaniosMes(@Param("mes") Integer mes);
     
-    @Query(value ="select concat(rp.nombre,' ',rp.apellido_pat,' ',rp.apellido_mat) as nombre_completo,\n" +
-"rp.profesion, rp.fecha_nacimiento,rp.fecha_alta,rp.telefono,rp.correo,rp.activo \n" +
-"from administracion.rh_personas rp", nativeQuery = true)
-    List<RhPersonas> dameTpersona();
+//lista a todas las personas con los campos nombre, apellidos, profesión, fecha naci, fecha alta, tel, correo y estatus
+    @Query(value = "select rp.id,concat(rp.nombre,' ',rp.apellido_pat,' ',rp.apellido_mat) as NombreCompleto,\n"
+            + "rp.profesion,rp.fecha_nacimiento,rp.fecha_alta,rp.telefono,rp.correo,rp.activo \n"
+            + "from administracion.rh_personas rp", nativeQuery = true)
+    List<IEmpleados> dameTpersona();
 
 }

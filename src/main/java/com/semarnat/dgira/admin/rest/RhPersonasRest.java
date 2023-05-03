@@ -1,6 +1,7 @@
 package com.semarnat.dgira.admin.rest;
 
 import com.semarnat.dgira.admin.model.RhPersonas;
+import com.semarnat.dgira.admin.model.generic.IEmpleados;
 import com.semarnat.dgira.admin.repos.RhPersonasRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class RhPersonasRest {
     
     @GetMapping (value = "/lista")
     @ResponseBody
-    public List<RhPersonas> dameTpersona() {
+    public List<IEmpleados> dameTpersona() {
         LOGGER.info("Estro a buscar Personas");
         return repoP.dameTpersona();
     }
