@@ -20,20 +20,17 @@ public interface RhPersonasRepository extends CrudRepository<RhPersonas, Integer
 
     //Consultas Nativas
 
-    @Query(value = "select rp.id, concat(rp.nombre,' ',rp.apellido_pat,' ',rp.apellido_mat) as nombre_completo,\n"
-            + " rpt.nombre_puesto, rn.nombre, ra2.dir_corto,ra.activo\n"
-            + "from administracion.rh_personas rp\n"
-            + "inner join administracion.rh_adscripcion ra on rp.id = ra.persona\n"
-            + "inner join administracion.rh_puesto_tipo rpt on rpt.id = ra.puesto\n"
-            + "inner join administracion.rh_nombramiento rn on rn.id = rpt.tipo_nombramiento\n"
-            + "inner join administracion.rh_areas ra2 on ra2.id = rpt.tipo_area", nativeQuery = true)
-    List<String> dameTpersona();
-
-    @Query(value = "select distinct rp.id from administracion.rh_personas rp", nativeQuery = true)
+   /* @Query(value = "select distinct rp.id from administracion.rh_personas rp", nativeQuery = true)
     List<Integer> damePersona();
-
+    */
+    
     @Query(value = "select * from administracion.rh_personas p \n"
             + "where extract(month from p.fecha_nacimiento) = :mes order by fecha_nacimiento", nativeQuery = true)
     List<RhPersonas> dameCumpleaniosMes(@Param("mes") Integer mes);
+    
+    @Query(value ="select concat(rp.nombre,' ',rp.apellido_pat,' ',rp.apellido_mat) as nombre_completo,\n" +
+"rp.profesion, rp.fecha_nacimiento,rp.fecha_alta,rp.telefono,rp.correo,rp.activo \n" +
+"from administracion.rh_personas rp", nativeQuery = true)
+    List<RhPersonas> dameTpersona();
 
 }

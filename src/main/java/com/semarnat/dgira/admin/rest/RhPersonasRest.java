@@ -29,16 +29,16 @@ public class RhPersonasRest {
     
     @GetMapping (value = "/lista")
     @ResponseBody
-    public List<String> dameTpersona() {
+    public List<RhPersonas> dameTpersona() {
         LOGGER.info("Estro a buscar Personas");
         return repoP.dameTpersona();
     }
 
-    @GetMapping(value = "/cumples/{mes}")
+    /*@GetMapping(value = "/cumples/{mes}")
     @ResponseBody
     public List<RhPersonas> dameCumplesMes(@PathVariable("mes") Integer mes) {
         LOGGER.info("Entró a buscar los cumpleañeros");
         return repoP.dameCumpleaniosMes(mes);
     }
-    
+    */
 }
