@@ -28,9 +28,9 @@ public interface RhPersonasRepository extends CrudRepository<RhPersonas, Integer
             + "where extract(month from p.fecha_nacimiento) = :mes order by fecha_nacimiento", nativeQuery = true)
     List<RhPersonas> dameCumpleaniosMes(@Param("mes") Integer mes);
     
-//lista a todas las personas con los campos nombre, apellidos, profesión, fecha naci, fecha alta, tel, correo y estatus
+//lista los campos nombre, apellidos, profesión, fecha naci, fecha alta, tel, correo y estatus
     @Query(value = "select rp.id,concat(rp.nombre,' ',rp.apellido_pat,' ',rp.apellido_mat) as NombreCompleto,\n"
-            + "rp.profesion,rp.fecha_nacimiento,rp.fecha_alta,rp.telefono,rp.correo,rp.activo \n"
+            + "rp.profesion,rp.fecha_nacimiento as fechaNacimiento,rp.fecha_alta as fechaAlta,rp.telefono,rp.correo,rp.activo \n"
             + "from administracion.rh_personas rp", nativeQuery = true)
     List<IEmpleados> dameTpersona();
 
