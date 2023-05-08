@@ -205,4 +205,7 @@ public class RhPersonas implements Serializable {
         return "com.semarnat.dgira.admin.model.RhPersonas[ id=" + id + " ]";
     }
     
+   /* public String getCompleto(){
+        return this.nombre + ' ' + this.apellidoPat + ' ' + this.apellidoMat;
+    }*/
 }

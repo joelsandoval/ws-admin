@@ -27,11 +27,16 @@ public interface RhPersonasRepository extends CrudRepository<RhPersonas, Integer
     @Query(value = "select * from administracion.rh_personas p \n"
             + "where extract(month from p.fecha_nacimiento) = :mes order by fecha_nacimiento", nativeQuery = true)
     List<RhPersonas> dameCumpleaniosMes(@Param("mes") Integer mes);
-    
+
 //lista los campos nombre, apellidos, profesión, fecha naci, fecha alta, tel, correo y estatus
     @Query(value = "select rp.id,concat(rp.nombre,' ',rp.apellido_pat,' ',rp.apellido_mat) as NombreCompleto,\n"
             + "rp.profesion,rp.fecha_nacimiento as fechaNacimiento,rp.fecha_alta as fechaAlta,rp.telefono,rp.correo,rp.activo \n"
             + "from administracion.rh_personas rp", nativeQuery = true)
     List<IEmpleados> dameTpersona();
+
+    @Query(value = "select * from administracion.rh_personas rp where rp.nombre ilike '%'||:criterio||'%'"
+            + " or rp.apellido_pat ilike '%'||:criterio||'%'\n"
+            + "or rp.apellido_mat ilike '%'||:criterio||'%'", nativeQuery = true)
+    List<RhPersonas> BuscaPersona(@Param("criterio") String criterio);
 
 }

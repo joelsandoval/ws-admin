@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 /**
@@ -33,6 +34,13 @@ public class RhPersonasRest {
     public List<IEmpleados> dameTpersona() {
         LOGGER.info("Estro a buscar Personas");
         return repoP.dameTpersona();
+    }
+    
+    @GetMapping (value = "/busqueda/{criterio}")
+    @ResponseBody
+    public List<RhPersonas> BuscaPersona(@PathVariable ("criterio") String criterio){
+        LOGGER.info("Entro a Buscar Personas");
+        return repoP.BuscaPersona(criterio);
     }
 
     /*@GetMapping(value = "/cumples/{mes}")
