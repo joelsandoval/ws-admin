@@ -1,7 +1,9 @@
 package com.semarnat.dgira.admin.rest;
 
+import com.semarnat.dgira.admin.model.RhAreas;
 import com.semarnat.dgira.admin.model.RhPersonas;
 import com.semarnat.dgira.admin.model.generic.IEmpleados;
+import com.semarnat.dgira.admin.repos.RhAreasRepository;
 import com.semarnat.dgira.admin.repos.RhPersonasRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,8 @@ public class RhPersonasRest {
     
     @Autowired
     private RhPersonasRepository repoP;
+    @Autowired
+    private RhAreasRepository repoA;
     
     @GetMapping (value = "/lista")
     @ResponseBody
@@ -50,4 +54,11 @@ public class RhPersonasRest {
         return repoP.dameCumpleaniosMes(mes);
     }
     */
+    
+    @GetMapping (value = "/listarea")
+    @ResponseBody
+    public List<RhAreas> dameAreas() {
+        LOGGER.info("Estro a buscar Area");
+        return repoA.dameAreas();
+    }
 }
