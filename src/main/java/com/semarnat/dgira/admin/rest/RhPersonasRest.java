@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  *
  * @author Anallely
@@ -30,8 +34,7 @@ public class RhPersonasRest {
     
     @Autowired
     private RhPersonasRepository repoP;
-    @Autowired
-    private RhAreasRepository repoA;
+    
     
     @GetMapping (value = "/lista")
     @ResponseBody
@@ -46,19 +49,12 @@ public class RhPersonasRest {
         LOGGER.info("Entro a Buscar Personas");
         return repoP.BuscaPersona(criterio);
     }
-
-    /*@GetMapping(value = "/cumples/{mes}")
+    //Servicio predeterminado de guardado y Actualizar
+    @PostMapping 
+    @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public List<RhPersonas> dameCumplesMes(@PathVariable("mes") Integer mes) {
-        LOGGER.info("Entró a buscar los cumpleañeros");
-        return repoP.dameCumpleaniosMes(mes);
-    }
-    */
-    
-    @GetMapping (value = "/listarea")
-    @ResponseBody
-    public List<RhAreas> dameAreas() {
-        LOGGER.info("Estro a buscar Area");
-        return repoA.dameAreas();
+    public RhPersonas guardaPersona(@RequestBody RhPersonas persona) {
+        LOGGER.info("Entró a Guardar");
+        return repoP.save(persona);
     }
 }

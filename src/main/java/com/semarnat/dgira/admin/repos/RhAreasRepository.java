@@ -15,8 +15,9 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface RhAreasRepository extends CrudRepository<RhAreas, Integer>{
     
-    //consulta para traer direcciones de area
-    @Query(value = "select ra.* from administracion.rh_areas ra where ra.parent_id = 1", nativeQuery =true)
-    List<RhAreas> dameAreas();
+    //consulta para traer direccion general y areas
+    @Query(value = "select ra.* from administracion.rh_areas ra where ra.parent_id = 0 "
+            + "or ra.parent_id = 1", nativeQuery =true)
+    List<RhAreas> dameDirecciones();
     
 }
