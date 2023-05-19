@@ -6,6 +6,7 @@ package com.semarnat.dgira.admin.repos;
 
 import com.semarnat.dgira.admin.model.RhPersonas;
 import com.semarnat.dgira.admin.model.generic.IEmpleados;
+import com.semarnat.dgira.admin.model.generic.VwEmpleados;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -38,5 +39,7 @@ public interface RhPersonasRepository extends CrudRepository<RhPersonas, Integer
             + " or rp.apellido_pat ilike '%'||:criterio||'%'\n"
             + "or rp.apellido_mat ilike '%'||:criterio||'%'", nativeQuery = true)
     List<RhPersonas> BuscaPersona(@Param("criterio") String criterio);
+
+    
 
 }

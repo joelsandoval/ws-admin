@@ -3,8 +3,10 @@ package com.semarnat.dgira.admin.rest;
 import com.semarnat.dgira.admin.model.RhAreas;
 import com.semarnat.dgira.admin.model.RhPersonas;
 import com.semarnat.dgira.admin.model.generic.IEmpleados;
+import com.semarnat.dgira.admin.model.generic.VwEmpleados;
 import com.semarnat.dgira.admin.repos.RhAreasRepository;
 import com.semarnat.dgira.admin.repos.RhPersonasRepository;
+import com.semarnat.dgira.admin.repos.VwEmpleadosRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class RhPersonasRest {
     @Autowired
     private RhPersonasRepository repoP;
     
+    @Autowired
+    private VwEmpleadosRepository repoE;
+    
     
     @GetMapping (value = "/lista")
     @ResponseBody
@@ -56,5 +61,12 @@ public class RhPersonasRest {
     public RhPersonas guardaPersona(@RequestBody RhPersonas persona) {
         LOGGER.info("Entró a Guardar");
         return repoP.save(persona);
+    }
+    
+    @GetMapping (value = "/empleados")
+    @ResponseBody
+    public List<VwEmpleados> dameEmpleados(){
+        LOGGER.info("Entro a Buscar Empleados");
+        return repoE.dameEmpleados();
     }
 }
