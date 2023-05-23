@@ -5,24 +5,30 @@
 package com.semarnat.dgira.admin.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
- * @author Anallely
+ * @author eduardo.trujillo
  */
 @Entity
-@Table(name = "rh_areas", schema = "administracion")
-
-public class RhAreas implements Serializable {
+@Table(name = "md_cambios", schema = "sigeia")
+@NamedQueries({
+    @NamedQuery(name = "MdCambios.findAll", query = "SELECT m FROM MdCambios m")})
+public class MdCambios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -30,17 +36,21 @@ public class RhAreas implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "nombre_dir")
-    private String nombreDir;
-    @Column(name = "dir_corto")
-    private String dirCorto;
-    @Column(name = "parent_id")
-    private Integer parentId;
+    @Column(name = "fecha_cambio")
+    @Temporal(TemporalType.DATE)
+    private Date fechaCambio;
+    @Column(name = "observacion")
+    private String observacion;
+    @Column(name = "tipo")
+    private Integer tipo;
+    @JoinColumn(name = "id_capa", referencedColumnName = "id")
+    @ManyToOne
+    private Layer idCapa;
 
-    public RhAreas() {
+    public MdCambios() {
     }
 
-    public RhAreas(Integer id) {
+    public MdCambios(Integer id) {
         this.id = id;
     }
 
@@ -52,28 +62,36 @@ public class RhAreas implements Serializable {
         this.id = id;
     }
 
-    public String getNombreDir() {
-        return nombreDir;
+    public Date getFechaCambio() {
+        return fechaCambio;
     }
 
-    public void setNombreDir(String nombreDir) {
-        this.nombreDir = nombreDir;
+    public void setFechaCambio(Date fechaCambio) {
+        this.fechaCambio = fechaCambio;
     }
 
-    public String getDirCorto() {
-        return dirCorto;
+    public String getObservacion() {
+        return observacion;
     }
 
-    public void setDirCorto(String dirCorto) {
-        this.dirCorto = dirCorto;
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
-    public Integer getParentId() {
-        return parentId;
+    public Integer getTipo() {
+        return tipo;
     }
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
+    }
+
+    public Layer getIdCapa() {
+        return idCapa;
+    }
+
+    public void setIdCapa(Layer idCapa) {
+        this.idCapa = idCapa;
     }
 
     @Override
@@ -86,10 +104,10 @@ public class RhAreas implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RhAreas)) {
+        if (!(object instanceof MdCambios)) {
             return false;
         }
-        RhAreas other = (RhAreas) object;
+        MdCambios other = (MdCambios) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -98,7 +116,7 @@ public class RhAreas implements Serializable {
 
     @Override
     public String toString() {
-        return "com.semarnat.dgira.admin.model.RhAreas[ id=" + id + " ]";
+        return "com.semarnat.dgira.admin.model.MdCambios[ id=" + id + " ]";
     }
     
 }
