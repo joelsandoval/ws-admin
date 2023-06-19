@@ -1,10 +1,12 @@
                                                             package com.semarnat.dgira.admin.rest;
 
 import com.semarnat.dgira.admin.model.MdEstructura;
-import com.semarnat.dgira.admin.model.MdLink;
 import com.semarnat.dgira.admin.model.vistas.VwMdCambios;
 import com.semarnat.dgira.admin.model.vistas.VwMdEstructuraLayer;
 import com.semarnat.dgira.admin.model.vistas.VwMdLinks;
+import com.semarnat.dgira.admin.model.vistas.VwMdResumenCapasgeo;
+import com.semarnat.dgira.admin.model.vistas.VwMdResumenMet;
+import com.semarnat.dgira.admin.repos.MdCambiosRepository;
 import com.semarnat.dgira.admin.repos.MdEstructuraLayerValoresRepository;
 import com.semarnat.dgira.admin.repos.MdFechasProcesosRepository;
 import org.slf4j.Logger;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.semarnat.dgira.admin.repos.MdIncisosRepository;
 import com.semarnat.dgira.admin.repos.MdLinksRepository;
+import com.semarnat.dgira.admin.repos.MdResumenCapasGeoRepository;
+import com.semarnat.dgira.admin.repos.MdResumenMetRepository;
 
 /**
  *
@@ -43,6 +47,15 @@ class MdEstructuraREST {
       
        @Autowired
     private MdLinksRepository Urls;
+       
+       @Autowired
+    private MdCambiosRepository Cambios;
+       
+       @Autowired
+    private MdResumenCapasGeoRepository Resmet;
+       
+       @Autowired
+    private MdResumenMetRepository Resmet2;
 
     @GetMapping(value = "todasec")
     @ResponseBody
@@ -74,6 +87,29 @@ class MdEstructuraREST {
         LOGGER.info("Presenta Ligas de temas");
         return Urls.dameLink(capa);
 
+    }
+    
+      @GetMapping(value = "cambios/{capa}")
+    @ResponseBody
+    public List<VwMdCambios> dameCambios(@PathVariable("capa") Integer capa) {
+        LOGGER.info("Presenta Cambios en la capa");
+        return Cambios.dameCambios(capa);
+
     }  
     
+     @GetMapping(value = "resmet/{capa}")
+    @ResponseBody
+    public VwMdResumenCapasgeo dameVwMdResumenCapasGeo(@PathVariable("capa") Integer capa) {
+        LOGGER.info("Presenta resumen de capas de metadatos");
+        return Resmet.dameVwMdResumenCapasGeo(capa);
+    }  
+    
+    @GetMapping(value = "resmet2/{capa}")
+    @ResponseBody
+    public List<VwMdResumenMet> dameVwMdResumenMet(@PathVariable("capa") Integer capa) {
+        LOGGER.info("Presenta resumen de capas de metadatos2");
+        return Resmet2.dameVwMdResumenMet(capa);
+    }  
+    
+        
 }

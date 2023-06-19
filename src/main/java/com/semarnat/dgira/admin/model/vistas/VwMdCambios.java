@@ -26,8 +26,8 @@ import javax.persistence.TemporalType;
 public class VwMdCambios implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
     @Column(name = "id")
+    @Id
     private Integer id;
     @Column(name = "id_capa")
     private Integer idCapa;
@@ -36,10 +36,6 @@ public class VwMdCambios implements Serializable {
     @Column(name = "fecha_cambio")
     @Temporal(TemporalType.DATE)
     private Date fechaCambio;
-    @Column(name = "ae")
-    private Boolean ae;
-    @Column(name = "ac")
-    private Boolean ac;
     @Column(name = "observacion")
     private String observacion;
 
@@ -76,22 +72,6 @@ public class VwMdCambios implements Serializable {
 
     public void setFechaCambio(Date fechaCambio) {
         this.fechaCambio = fechaCambio;
-    }
-
-    public Boolean getAe() {
-        return ae;
-    }
-
-    public void setAe(Boolean ae) {
-        this.ae = ae;
-    }
-
-    public Boolean getAc() {
-        return ac;
-    }
-
-    public void setAc(Boolean ac) {
-        this.ac = ac;
     }
 
     public String getObservacion() {
